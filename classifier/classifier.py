@@ -12,7 +12,7 @@ import shutil
 from PIL import Image
 import numpy as np
 
-UPLOAD_FOLDER = "./static/images/"
+UPLOAD_FOLDER = "classifier/static/images"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 labels = ["飛行機", "自動車", "鳥", "猫", "鹿", "犬", "カエル", "馬", "船", "トラック"]
