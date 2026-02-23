@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect, url_for, render_template, Markup
+from flask import Flask, request, redirect, url_for, render_template
+from markupsafe import Markup
 from werkzeug.utils import secure_filename
 
 import torch
