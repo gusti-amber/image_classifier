@@ -1,12 +1,109 @@
 {% extends "layout.html" %} {% block content %}
-<div class="container">
-  <div class="col content">
-    <h1>判定結果</h1>
-    {{result}}
-    <p><img src="{{filepath}}" /></p>
-    <form method="post" , enctype="multipart/form-data" , action="/result">
-      <input name="file" type="file" />
-      <input class="btn btn-accent" type="submit" , value="判定" />
+<div class="flex justify-center">
+  <div
+    class="flex flex-col items-center justify-center gap-6 p-12 max-w-2xl w-full"
+  >
+    <p class="text-2xl font-bold">判定するサンプル名を選択ください</p>
+
+    <form method="post" action="{{ url_for('result') }}">
+      <fieldset class="form-control w-full max-w-md">
+        <legend class="text-lg label-text mb-2">名前一覧</legend>
+        <div class="flex flex-col items-start justify-center gap-2">
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="飛行機"
+              class="radio radio-neutral"
+              required
+            />
+            <span class="label-text ml-2">飛行機</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="自動車"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">自動車</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="鳥"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">鳥</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="猫"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">猫</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="鹿"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">鹿</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="犬"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">犬</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="カエル"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">カエル</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="馬"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">馬</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="船"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">船</span>
+          </label>
+          <label class="label cursor-pointer">
+            <input
+              type="radio"
+              name="sample"
+              value="トラック"
+              class="radio radio-neutral"
+            />
+            <span class="label-text ml-2">トラック</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button class="btn btn-success mt-4" type="submit">判定</button>
     </form>
   </div>
 </div>
