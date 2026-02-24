@@ -12,7 +12,7 @@ import shutil
 from PIL import Image
 import numpy as np
 
-UPLOAD_FOLDER = "classifier/static/images"
+UPLOAD_FOLDER = "static/images"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 labels = ["飛行機", "自動車", "鳥", "猫", "鹿", "犬", "カエル", "馬", "船", "トラック"]
@@ -89,7 +89,7 @@ def result():
         # 予測
         net = Net()
         net.load_state_dict(torch.load(
-            "classifier/model_cnn.pth", map_location=torch.device("cpu")))
+            "model_cnn.pth", map_location=torch.device("cpu")))
         net.eval()  # 評価モード
 
         y = net(x)
@@ -102,9 +102,7 @@ def result():
             label = labels[idx]
             result += "<p>" + str(round(ratio*100, 1)) + \
                 "%の確率で" + label + "です。</p>"
-        # 画像表示用にURLパスを渡す（Flaskは /static/... で静的ファイルを配信する）
-        image_url = url_for("static", filename=f"images/{filename}")
-        return render_template("result.html", result=Markup(result), filepath=image_url)
+        return render_template("result.html", result=Markup(result), filepath=filepath)
     else:
         return redirect(url_for("index"))
 
