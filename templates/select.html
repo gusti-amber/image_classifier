@@ -5,7 +5,7 @@
   >
     <p class="text-2xl font-bold">判定するサンプル名を選択ください</p>
 
-    <form method="post" action="{{ url_for('result') }}">
+    <form id="sample-form" method="post" action="{{ url_for('result') }}">
       <fieldset class="form-control w-full max-w-md">
         <legend class="text-lg label-text mb-2">名前一覧</legend>
         <div class="flex flex-col items-start justify-center gap-2">
@@ -102,9 +102,11 @@
           </label>
         </div>
       </fieldset>
-
-      <button class="btn btn-success mt-4" type="submit">判定</button>
     </form>
+
+    <button class="btn btn-success mt-4" type="submit" form="sample-form">
+      判定
+    </button>
   </div>
 </div>
 {% endblock %}
