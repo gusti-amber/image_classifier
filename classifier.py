@@ -59,22 +59,43 @@ def select():
 @app.route("/result", methods=["GET", "POST"])
 def result():
     if request.method == "POST":
-        # ファイルの存在と形式を確認
-        if "file" not in request.files:
-            print("File doesn't exist!")
-            return redirect(url_for("index"))
-        file = request.files["file"]
-        if not allowed_file(file.filename):
-            print(file.filename + ": File not allowed!")
-            return redirect(url_for("index"))
+        file = request.files.get("file")
+        sample = request.form.get("sample")
+        filepath = None
 
-        # ファイルの保存
-        if os.path.isdir(UPLOAD_FOLDER):
-            shutil.rmtree(UPLOAD_FOLDER)
-        os.mkdir(UPLOAD_FOLDER)
-        filename = secure_filename(file.filename)  # ファイル名を安全なものに
-        filepath = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(filepath)
+        if file and file.filename != "":
+            if not allowed_file(file.filename):
+                print(file.filename + ": File not allowed!")
+                return redirect(url_for("index"))
+
+            # ファイルの保存
+            if os.path.isdir(UPLOAD_FOLDER):
+                shutil.rmtree(UPLOAD_FOLDER)
+            os.mkdir(UPLOAD_FOLDER)
+            filename = secure_filename(file.filename)  # ファイル名を安全なものに
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(filepath)
+        elif sample:
+            sample_files = {
+                "飛行機": "airplane.jpg",
+                "自動車": "automobile.jpg",
+                "鳥": "bird.jpg",
+                "猫": "cat.jpg",
+                "鹿": "deer.jpg",
+                "犬": "dog.jpg",
+                "カエル": "frog.jpg",
+                "馬": "horse.jpg",
+                "船": "ship.jpg",
+                "トラック": "truck.jpg",
+            }
+            filename = sample_files.get(sample)
+            if filename is None:
+                print(sample + ": Sample not allowed!")
+                return redirect(url_for("index"))
+            filepath = os.path.join("static", "images", filename)
+        else:
+            print("No file or sample selected!")
+            return redirect(url_for("index"))
 
         # 画像の読み込み
         image = Image.open(filepath)
